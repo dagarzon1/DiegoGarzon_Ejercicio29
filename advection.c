@@ -65,7 +65,7 @@ int main(int argc, char ** argv){
         sprintf(filename, "sample_%d.txt", i);
         out = fopen(filename, "w");
         for (int j=0;j<N;j++){
-            fprintf(out, "%f , %f", x[j], u_final[j]);
+            fprintf(out, "%f , %f\n", x[j], u_final[j]);
         }
     }
     return 0;
