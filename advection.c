@@ -34,16 +34,15 @@ double * lax(double * u, double t_max, double dt, double dx, int N){
     
     int N_t = (int) t_max/dt;
     double * u_f = new double[N];
-    for(int i=0;i<N;i++){u_f[i]=u[i];}
+    double * u_copy = new double[N];
+    for(int i=0;i<N;i++){u_copy[i]=u[i];}
+    for(int i=0;i<N;i++){u_f[i]=u_copy[i];}
     for(int i=0;i<N_t;i++){
-        double * F = flux (u, N);
-        for (int j=1;j<N;j++){
-            u_f[j] = 0.5 * ( u[j+1] + u[j-1]);
-        }
-        for (int j=1;j<N;j++){
-            u_f[j] = u_f[j] - ( (0.5 * dt/dx) * ( F[j+1] - F[j-1]  )  );
-        }
-        for(int i=0;i<N;i++){u[i]=u_f[i];}
+        double * F = flux (u_copy, N);
+        for (int j=1;j<N-1;j++){
+            u_f[j] = 0.5 * ( u_copy[j+1] + u_copy[j-1]);
+            u_f[j] -= (0.5 * dt/dx) * ( F[j+1] - F[j-1] );}
+        for(int k=0;k<N;k++){u_copy[k]=u_f[k];}
     }
     return u_f;    
 }
