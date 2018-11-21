@@ -3,7 +3,7 @@
 
 int main(int argc, char ** argv)
 {
-    #pragma imp parallel
+    #pragma omp parallel
     {
         int thread_id = omp_get_thread_num();
         int thread_count = omp_get_num_threads();
