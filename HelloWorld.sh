@@ -9,5 +9,6 @@
 module load anaconda/python3
 cd $PBS_O_WORKDIR 
 gcc -fopenmp HelloWorld.c -o HelloWorld.x
+export OMP_NUM_THREADS=4
 
 ./HelloWorld.x
